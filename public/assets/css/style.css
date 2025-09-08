@@ -1,0 +1,139 @@
+:root {
+  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Questrial",  sans-serif;
+  --nav-font: "Noto Sans",  sans-serif;
+}
+
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root { 
+  --background-color: #fbd7d2; /* Background color for the entire website, including individual sections */
+  --default-color: #0a0f14; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #16395c; /* Color for headings, subheadings and title throughout the website */
+  --heading2-color: #093b3e;
+  --accent-color: #266983; /* COLOR 1 Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent2-color: #1a4455;
+  --accent-disabled: #1541527a;
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+
+  --background2-color: #fcc3c3;
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #0a0f14;  /* COLOR 1 The default color of the main navmenu links */
+  --nav-hover-color: #28718e; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #0a0f14; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #134052; /* COLOR 1 Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+.light-background {
+  --background-color: #093b3e;
+  --heading-color: #fbd7d2;
+  --default-color: #989898;
+  --surface-color: #115154;
+}
+
+.dark-background {
+  --background-color: #fcafa5;
+  --default-color: #f8ccc7;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+}
+
+/* Smooth scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+# General Styling & Shared Classes
+--------------------------------------------------------------*/
+body {
+    background-color: white;
+    font-family: var(--default-font);
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100dvh;
+    
+    & main{
+        flex-grow: 1;
+    }
+}
+.loginIcon{
+    background-color: var(--accent-color);
+
+}
+
+.field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+
+    .input-wrap{
+      position:relative;
+      display:flex;
+      align-items:center;
+    }
+
+input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="phone"],
+    input[type="email"],
+    input[type="file"],
+    select{
+      height: auto;
+      width:100%;
+      padding:12px 44px 12px 14px;
+      font-size:1rem;
+      border-radius:999px; /* fully rounded pill */
+      border:1px solid var(--heading2-color);
+      color:inherit;
+      outline:none;
+      transition: box-shadow .12s ease, border-color .12s ease, transform .06s;
+    }
+
+    .icon-btn{
+      position:absolute;
+      right:8px;
+      border:0;
+      background:transparent;
+      height:36px;
+      width:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px;
+      border-radius:999px;
+      cursor:pointer;
+      color:var(--muted);
+    }
+    
+    .btn-shop-submit{
+        background-color: var(--accent-color);
+        margin: 1rem auto;
+        padding: 1.5rem 2rem;
+        border: none;
+        color: white;
+        transition: 0.3s;
+    }
+    .btn-shop-submit:hover{
+        background-color: var(--accent2-color);
+    }
+    .btn-shop-submit:disabled{
+      background-color: var(--accent-disabled);
+    }
+
+
+
+    
