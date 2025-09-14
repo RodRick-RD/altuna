@@ -132,4 +132,20 @@ class ControllerUser extends Controller
         return view('dashboard.index', compact('cantidadProductosCarrito'));
     }
     
+    public function index(){
+        $users=User::all();
+        return view('usuario.index',compact('users'));
+    }
+
+    public function cambiarEstado(Request $request)
+    {
+        $usuario = User::find($request->id);
+        if (!$usuario) {
+            return response()->json(['success' => false, 'message' => 'Usuario no encontrado']);
+        }
+        $usuario->estado = $request->estado == 1 ? 1 : 0;
+
+        $usuario->save();
+        return response()->json(['success' => true, 'estado' => $usuario->estado == 1 ? 'activo' : 'inactivo']);
+    }
 }

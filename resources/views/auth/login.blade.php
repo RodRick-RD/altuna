@@ -31,6 +31,9 @@
   <script src="{{ asset('assets/js/jquery-3.3.1.js') }}"></script>
 </head>
 <body>
+<div id="spinner-overlay">
+    <div class="spinner"></div>
+</div>
 <div class="container-fluid vh-100">
     <div class="row vh-100 justify-content-stretch">
         <div class="col-12 col-lg-5 col-sm-6 h-100 d-flex justify-content-center align-items-center">
@@ -132,5 +135,6 @@ togglePassword.addEventListener('click', function (e) {
     icon.classList.toggle('fa-eye');
 });
 </script>
+<script src="{{ asset('assets/js/loader.js') }}"></script>
 </body>
 </html>

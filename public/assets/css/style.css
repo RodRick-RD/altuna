@@ -91,17 +91,38 @@ input[type="text"],
     input[type="phone"],
     input[type="email"],
     input[type="file"],
+    input[type="date"],
+    input[type="time"],
     select{
       height: auto;
       width:100%;
-      padding:12px 44px 12px 14px;
+      padding:12px 12px 12px 14px;
       font-size:1rem;
-      border-radius:999px; /* fully rounded pill */
+      border-radius:999px;
       border:1px solid var(--heading2-color);
       color:inherit;
       outline:none;
       transition: box-shadow .12s ease, border-color .12s ease, transform .06s;
     }
+
+
+    textarea{
+      min-height: 300px;
+      max-height: 300px;
+      width:100%;
+      padding:12px 44px 12px 14px;
+      font-size:1rem;
+      border-radius:10px;
+      border:1px solid;
+      color:inherit;
+      resize: none;
+      outline:none;
+      overflow:auto;
+      border-color: var(--heading2-color) !important;
+      padding-right: 1.5rem;
+      transition: box-shadow .12s ease, border-color .12s ease, transform .06s;
+    }
+
 
     .icon-btn{
       position:absolute;
@@ -122,7 +143,7 @@ input[type="text"],
     .btn-shop-submit{
         background-color: var(--accent-color);
         margin: 1rem auto;
-        padding: 1.5rem 2rem;
+        padding: 1rem 1.5rem;
         border: none;
         color: white;
         transition: 0.3s;
@@ -134,6 +155,51 @@ input[type="text"],
       background-color: var(--accent-disabled);
     }
 
+    .btn-shop-add{
+        background-color: var(--accent-color);
+        margin: 1rem auto;
+        padding: 1rem;
+        border: none;
+        color: white;
+        transition: 0.3s;
+    }
+    .btn-shop-add:hover{
+        background-color: var(--accent2-color);
+    }
+    .btn-shop-add:disabled{
+      background-color: var(--accent-disabled);
+    }
 
+
+
+/* SPINNER*/
+/* Fondo semitransparente */
+#spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid var(--accent-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#spinner-overlay.hidden {
+  display: none;
+}
 
     

@@ -14,10 +14,10 @@ class LoginController extends Controller
             $role = auth()->user()->role;
 
             return match ($role) {
-                'administrador' => redirect('/panel'),
-                'supervisor'    => redirect('/panel'),
-                'cliente'       => redirect('/validar-venta'),
-                default         => redirect('/validar-venta'),
+                'administrador' => redirect('/dashboard'),
+                'supervisor'    => redirect('/dashboard'),
+                'cliente'       => redirect('/dashboard'),
+                default         => redirect('/dashboard'),
             };
         }
         return view('auth.login');
@@ -54,8 +54,8 @@ class LoginController extends Controller
             // Redirigir según el rol
             $role = $user->role;
             return match ($role) {
-                'cliente' => redirect()->intended('/validar-venta'),
-                default   => redirect()->intended('/validar-venta'),
+                'cliente' => redirect()->intended('/dashboard'),
+                default   => redirect()->intended('/dashboard'),
             };
         }
 

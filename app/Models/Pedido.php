@@ -26,12 +26,12 @@ class Pedido extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function productos()
-        {
-            return $this->belongsToMany(Producto::class, 'venta_producto', 'venta_id', 'producto_id')
-                        ->withPivot('cantidad', 'precio');
-        }
+    {
+        return $this->belongsToMany(Producto::class, 'venta_producto', 'venta_id', 'producto_id')
+                    ->withPivot('cantidad', 'precio');
+    }
 }

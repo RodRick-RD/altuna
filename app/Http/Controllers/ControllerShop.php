@@ -46,19 +46,19 @@ class ControllerShop extends Controller
             'archivo' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
-            'razonsocial' => 'string|max:25',
-            'nit' => 'string|max:20',
+            'razonsocial' => 'nullable|string|max:25',
+            'nit' => 'nullable|string|max:20',
         ]);
 
         $ruta = $request->file('archivo')->store('comprobantes');
-
+        $nombreArchivo = basename($ruta);
         date_default_timezone_set('America/Caracas');
         $fecha = date("Y-m-d h:i:s");
         $usuario = Auth::user()->id;
         $pedido = new Pedido();
         $pedido->fecha = $fecha;
-        $pedido->comprobante = $ruta;
-        $pedido->estado = 'pendiente';
+        $pedido->comprobante = $nombreArchivo;
+        $pedido->estado = 'pedido';
         $pedido->user_id =$usuario;
         $pedido->latitud =$request->latitud;
         $pedido->longitud =$request->longitud;
@@ -90,6 +90,7 @@ class ControllerShop extends Controller
     }
 
     public function listapedidos(){
+        /*
         $usuario = Auth::user();
 
         $pedidos = Pedido::with('productos')
@@ -98,6 +99,8 @@ class ControllerShop extends Controller
             ->get();
         
         return view('client.pedidos', compact('pedidos'));
+        */
+        return view('client.mis-compras');
     }
 
     

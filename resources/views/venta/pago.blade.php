@@ -99,7 +99,7 @@
                 </div>
                 <div class="card p-4">
                   <h4 class="text-center my-3">Ubicación para la entrega</h4>
-                  <div>
+                  
                     <input type="hidden" name="latitud" id="latitud" value="" required>
                     @error('latitud')
                           <div class="text-danger">{{ $message }}</div>
@@ -111,7 +111,16 @@
                           <div class="text-danger">{{ $message }}</div>
                       @enderror
                   </div>
-                   
+
+                  <div class="col-12">
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrPcgLHdIkpWRKXLYHX4Ou_JbEWBezWuw"></script>
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+
+                    <div class="d-flex justify-content-center">
+                      <button type="button" class="btn-shop-submit px-4 py-2 rounded-pill my-3" id="saveBtn"><i class="fa-solid fa-location-dot"></i> Guardar Ubicación</button>
+                    </div>
+                  </div>
+                  
                 </div>
 
 
@@ -166,7 +175,7 @@
                 $("#latitud").val(lat);
                 $("#longitud").val(lng);
 
-                alert("Ubicación guardada: " + lat + ", " + lng);
+                //alert("Ubicación guardada: " + lat + ", " + lng);
                 $('.btn-shop-submit').prop('disabled', false);
             } else {
                 alert("Primero selecciona una ubicación en el mapa");
