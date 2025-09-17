@@ -162,14 +162,15 @@
         </div>
 
         <h3 class="titulo">Nota de Venta</h3>
+        @forelse ($ventas as $pedido)
         <table style="width: 100%; border: none;">
             <tr>
-                <td class="border: none;"><b>CLIENTE: </b></td>
-                <td class="border: none;"><b>Fecha y Hora: </b></td>
+                <td class="border: none;" style="width: 50%;"><b>CLIENTE: </b>{{ $pedido->razon_social }}</td>
+                <td class="border: none;" style="width: 50%;"><b>Fecha y Hora: </b>{{ \Carbon\Carbon::parse($pedido->fecha)->format('d/m/Y H:i:s') }}</td>
             </tr>
             <tr>
-                <td class="border: none;"><b>NITo C.I. </b</td>
-                <td class="border: none;">NIT</td>
+                <td class="border: none;" style="width: 50%;"><b>NITo C.I. </b>{{ $pedido->nit }}</td>
+                <td class="border: none;" style="width: 50%;"></td>
             </tr>
         </table>
 
@@ -188,7 +189,6 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($ventas as $pedido)
                     @foreach ($pedido->productos as $producto)
                         <tr>
                             <td>{{ $n }}</td>
@@ -214,15 +214,11 @@
                         <td colspan="4">TOTAL</td>
                         <td>{{ number_format($pedido->total - $pedido->descuento, 2, '.', ',') }}</td>
                     </tr>
-                    
-                @empty
-                    <tr>
-                        <td colspan="5" style="text-align:center;">No hay resultados</td>
-                    </tr>
-                @endforelse
             </tbody>
         </table>
-
+    @empty
+        <div style="text-align:center;">No hay resultados</div>
+    @endforelse
         <!-- Footer -->
         <div class="footer">
             <p>Gracias por su compra — {{ date('d/m/Y') }}</p>

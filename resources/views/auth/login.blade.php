@@ -92,7 +92,7 @@
                                 @endif
                         </div>
                         <div class="form-check mb-3">
-                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                            <input type="checkbox" name="remember" id="remember" class="form-check-input"  {{ old('remember') ? 'checked' : '' }}>
                             <label for="remember" class="form-check-label">Recordarme</label>
                         </div>
                         <div class="mb-3">

@@ -64,6 +64,7 @@ class ControllerProducto extends Controller
                 'descuento' => 'required|numeric',
                 'precio' => 'required|numeric',
                 'tipo' => 'required|string|max:1',
+                'stock' => 'required|numeric|min:0',
             ]);
 
             $producto->nombre = $request->nombre;
@@ -72,6 +73,7 @@ class ControllerProducto extends Controller
             $producto->precio = $request->precio;
             $producto->descuento = $request->descuento;
             $producto->tipo = $request->tipo;
+            $producto->stock = $request->stock;
             
             $producto->save();
 

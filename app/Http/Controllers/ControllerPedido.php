@@ -55,15 +55,25 @@ class ControllerPedido extends Controller
     {
         $id = $request->id;
         $pedido = Pedido::findOrFail($id);
-        
+
         $request->validate([
             'descuento' => "required|numeric|min:0|max:$pedido->total",
         ]);
 
+        foreach ($pedido->productos as $producto) {
+            if ($producto->stock < $producto->pivot->cantidad) {
+                return redirect()->back()->with('error', "Stock insuficiente para el producto {$producto->nombre}.");
+            }
+        }
+
+        foreach ($pedido->productos as $producto) {
+            $producto->stock -= $producto->pivot->cantidad;
+            $producto->save();
+        }
+
         $pedido->descuento = $request->descuento;
         $pedido->estado = "vendido";
         $pedido->save();
-
 
         return redirect('/pedido')->with('success', 'PEDIDO agregado a VENTAS correctamente.');
     }

@@ -76,6 +76,15 @@
                     }
                 </script>
             </div>
+            <div class="col-12 col-md-6 col-lg-4 form-group">
+                <label>Stock</label>
+                <input type="number" min="0" name="stock" placeholder="Stock" required
+                    class="@error('stock') is-invalid @enderror"
+                    value="{{ old('stock', $producto->stock) }}">
+                @error('stock')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             
 
 

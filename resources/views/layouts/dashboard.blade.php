@@ -69,23 +69,31 @@
       </a>
 @role('administrador')
 
-      <a class="nav-item" href="{{ route('usuario.index') }}">
-        <i class="fa-solid fa-users"></i>
-        <span>Usuarios</span>
-      </a>
-      <a class="nav-item" href="{{ route('productos.index') }}">
+      <a class="nav-item" href="{{ route('ventas.index') }}">
         <i class="fa-solid fa-boxes-stacked"></i>
-        <span>Productos</span>
+        <span>Ventas</span>
       </a>
       <a class="nav-item" href="{{ route('pedido.index') }}">
         <i class="fa-solid fa-boxes-stacked"></i>
         <span>Pedidos</span>
       </a>
-      <a class="nav-item" href="#">
+      <a class="nav-item" href="{{ route('productos.index') }}">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>Productos</span>
+      </a>
+      <a class="nav-item d-none" href="#">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         <span>Reportes</span>
       </a>
+      <a class="nav-item" href="{{ route('usuario.index') }}">
+        <i class="fa-solid fa-users"></i>
+        <span>Usuarios</span>
+      </a>
 @endrole
+      <a class="nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Cerrar sesión</span>
+      </a>
     </nav>
   </div>
 

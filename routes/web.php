@@ -8,6 +8,7 @@ use App\Http\Controllers\ControllerPedido;
 use App\Http\Controllers\ControllerProducto;
 use App\Http\Controllers\ControllerShop;
 use App\Http\Controllers\ControllerUser;
+use App\Http\Controllers\ControllerVenta;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/validar-venta', [ControllerShop::class, 'validarventa'])->name('venta.pago');
     Route::post('/subir-comprobante', [ControllerShop::class, 'subirComprobante'])->name('shop.subirComprobante');
     Route::get('/lista-pedidos', [ControllerShop::class, 'listapedidos'])->name('pedido.lista');
+    Route::get('/comprobante-de-venta/{id}/pdf', [ControllerPedido::class, 'exportPDFventa'])->name('pedido.comprobanteventapdf');
     Route::get('/mis-datos', [ControllerUser::class, 'edit'])->name('client.edit');
+
 
     Route::put('/client-actualizar', [ControllerUser::class, 'update'])->name('client.update');
 });
@@ -67,6 +70,9 @@ Route::middleware(['auth','role:administrador'])->group(function () {
     Route::get('/ubicacion/{id}', [ControllerPedido::class, 'ubicacion'])->name('ubicacion');
     Route::get('/pedido/{id}/confirmar', [ControllerPedido::class, 'confirmar'])->name('pedido.confirmar');
     Route::put('/pedido/validar-pedido', [ControllerPedido::class, 'validarPedido'])->name('pedido.validarpedido');
-    Route::get('/comprobante-de-venta/{id}/pdf', [ControllerPedido::class, 'exportPDFventa'])->name('pedido.comprobanteventapdf'); 
+    
+    
+    Route::get('/ventas', [ControllerVenta::class, 'index'])->name('ventas.index');
+
 });
 
