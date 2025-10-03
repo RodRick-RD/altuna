@@ -16,6 +16,7 @@ class ControllerShop extends Controller
     }
     public function validarventa(){
         $carrito = session()->get('carrito', []);
+        $productos=Producto::all();
         $user = auth()->user();
         
 
@@ -37,7 +38,7 @@ class ControllerShop extends Controller
 
         }
 
-        return response()->view('venta.pago', compact('carrito','user','dataUri'));
+        return response()->view('venta.pago', compact('carrito','productos','user','dataUri'));
     }
 
     public function subirComprobante(Request $request)
@@ -48,6 +49,7 @@ class ControllerShop extends Controller
             'longitud' => 'required|numeric',
             'razonsocial' => 'nullable|string|max:25',
             'nit' => 'nullable|string|max:20',
+            'carrito' => 'required|json',
         ]);
 
         $ruta = $request->file('archivo')->store('comprobantes');
@@ -68,16 +70,29 @@ class ControllerShop extends Controller
 
         $total = 0;
         $carrito = session('carrito', []);
+
+        $carrito = json_decode($request->carrito, true);
+        if (!$carrito || count($carrito) === 0) {
+            return back()->with('mensaje', 'El carrito está vacío');
+        }
         
-        foreach ($carrito as $productoId => $detalle) {
-            $subtotal = $detalle['cantidad'] * $detalle['precio'];
+        foreach ($carrito as $item) {
+            $producto = Producto::findOrFail($item['id']);
+
+            if ($item['cantidad'] > $producto->stock) {
+                return back()->with('stockinsuficiente', "No hay stock suficiente de {$producto->nombre}");
+            }
+
+            $subtotal = $producto->precio * $item['cantidad'];
             $total += $subtotal;
-            $pedido->productos()->attach($productoId, [
-                'cantidad' => $detalle['cantidad'],
-                'precio' => $detalle['precio']
+
+            $pedido->productos()->attach($producto->id, [
+                'cantidad' => $item['cantidad'],
+                'precio' => $producto->precio,
             ]);
 
-
+            $producto->stock -= $item['cantidad'];
+            $producto->save();
         }
 
         $pedido->total = $total;

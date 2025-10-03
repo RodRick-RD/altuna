@@ -6,6 +6,7 @@ use App\Http\Controllers\ControllerCarrito;
 use App\Http\Controllers\ControllerContacto;
 use App\Http\Controllers\ControllerPedido;
 use App\Http\Controllers\ControllerProducto;
+use App\Http\Controllers\ControllerProveedor;
 use App\Http\Controllers\ControllerShop;
 use App\Http\Controllers\ControllerUser;
 use App\Http\Controllers\ControllerVenta;
@@ -73,6 +74,9 @@ Route::middleware(['auth','role:administrador'])->group(function () {
     
     
     Route::get('/ventas', [ControllerVenta::class, 'index'])->name('ventas.index');
+
+
+    Route::get('/proveedores', [ControllerProveedor::class,'index'])->name('proveedores.index');
 
 });
 

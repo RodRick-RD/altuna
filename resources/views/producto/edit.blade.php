@@ -20,7 +20,7 @@
                 <input type="text" style="text-transform: uppercase;" name="nombre" placeholder="Nombre" required
                     class="form-control @error('name') is-invalid @enderror"
                     value="{{ old('nombre', $producto->nombre) }}">
-                @error('name')
+                @error('nombre')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

@@ -13,7 +13,7 @@
                 <label>Tipo de Venta:</label>
                 <select wire:model="tipoDeVenta" required>
                     <option value="pedido">Pedido</option>
-                    <option value="vendido">Vendido</option>
+                    <option value="vendido">Comprado</option>
                 </select>
             </div>
             <div class="col-12 col-md-6 col-md-4 col-lg-3">

@@ -412,7 +412,7 @@
                             </div>
                             <p class="text-center">
                                 ¿tienes una cuenta?
-                                <a href="{{ route('login') }}">inicia sesión aquí</a>
+                                <a href="{{ route('login') }}" class="text-success">inicia sesión aquí</a>
                             </p>
                         </form>
 

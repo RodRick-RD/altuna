@@ -1,0 +1,66 @@
+
+.header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-color);
+    color: #D4A24F;
+}
+.header h3{
+    margin: 0;
+    padding: 0;
+    color: var(--contrast-color);
+}
+.header i{
+    color: var(--contrast-color);
+}
+.header ul{
+    list-style: none;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+.header li {
+    color: var(--contrast-color);
+    margin: 0;
+    padding: 0;
+}
+.header li:hover {
+    color: var(--contrast-color);
+    cursor: pointer;
+}
+.header a{
+    color: white;
+}
+/*
+li::before {
+    content: "🛒";
+    margin-right: 8px;
+    color: #007bff;
+}
+    */
+
+
+.btn-primary{
+    background-color: var(--heading-color);
+    border: none;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus{
+    background-color: var(--accent2-color);
+}
+.btn-primary:disabled{
+    background-color: var(--accent2-color);
+}
+.text-primary-out{
+    color: var(--accent2-color);
+}
+.info-descuento{
+    background-color: var(--surface2-color);
+}

@@ -10,8 +10,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="icon">
-  <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="icon">
+  <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -101,17 +101,20 @@
 
                         <p class="text-center mb-3">
                             ¿No tienes una cuenta?
-                            <a href="{{ route('users.create') }}">Regístrate aquí</a>
+                            <a href="{{ route('users.create') }}" class="text-success">Regístrate aquí</a>
                         </p>
 
                         <p class="text-center">
-                            <a href="{{ route('shop.index') }}"  class="text-info">volver al inicio</a>
+                            <a href="{{ route('shop.index') }}"  class="text-success">volver al inicio</a>
                         </p>
                     </form>
                 </div>
             </div>
             <div class="flex-grow-1 col-sm-6 col-lg-7 p-4 d-none d-sm-flex justify-content-center align-items-center loginIcon">
-                <img src="{{ asset('assets/img/profile/logo.png') }}" class="img-fluid" alt="logo">
+                <div style="width: 100%; max-width: 300px;">
+                    <img src="{{ asset('assets/img/icon/logo-altuna-white.webp') }}" class="img-fluid" alt="logo">
+                </div>
+                
             </div>
     </div>
 </div>

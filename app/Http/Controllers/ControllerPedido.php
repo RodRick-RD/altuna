@@ -81,10 +81,19 @@ class ControllerPedido extends Controller
      public function exportPDFventa(string $id) 
     { 
         $idUser = Auth::id();
-        $ventas=Pedido::with('productos')
+        $ventas=null;
+        if(Auth::user()->role!='cliente'){
+            $ventas=Pedido::with('productos')
+            ->where('id', $id)
+            ->get();
+
+        }else{
+            $ventas=Pedido::with('productos')
             ->where('user_id', $idUser)
             ->where('id', $id)
             ->get();
+        }
+        
         $pdf = Pdf::loadView('venta.comprobante-pdf', compact('ventas')); 
         return $pdf->download('nota-de-venta.pdf'); 
     } 

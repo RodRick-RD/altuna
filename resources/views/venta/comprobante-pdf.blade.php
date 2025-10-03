@@ -152,7 +152,7 @@
         <!-- Cabecera -->
         <div class="header">
             <div>
-                <img src="{{ asset('assets/img/profile/logo.png') }}" alt="Logo Empresa">
+                <img src="{{ asset('assets/img/icon/logo-altuna.webp') }}" alt="Logo Empresa">
             </div>
         </div>
         <div class="empresa">

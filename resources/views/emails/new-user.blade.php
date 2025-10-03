@@ -73,9 +73,9 @@
         <p>Hola <strong>{{ $nombre }}</strong>,</p>
         <p>tu cuenta en nuestro sistema ha sido habiitado correntamente.</p>
         <p></p>
-        <p>Saludos,<br>Equipo de soporte NATURAL TUNAS</p>
+        <p>Saludos,<br>Equipo de soporte ALTUNA S.A.</p>
         <div class="footer">
-            &copy; {{ date('Y') }} NATURAL TUNA. Todos los derechos reservados.
+            &copy; {{ date('Y') }} ALTUNA S.A. Todos los derechos reservados.
         </div>
     </div>
 </body>

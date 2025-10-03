@@ -8,8 +8,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="icon">
-  <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="icon">
+  <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -49,7 +49,7 @@
 <div class="app">
   <div class="sidebar" id="sidebar">
     <div class="brand">
-      <div class="logo"><img src="{{ asset('assets/img/profile/logo.png') }}" class="img-fluid" alt="logo"></div>
+      <div class="logo"><img src="{{ asset('assets/img/icon/logo-altuna-black.webp') }}" class="img-fluid" alt="logo"></div>
       <div>
         <h1>ALTUNA</h1>
         <p>Panel administrativo</p>
@@ -80,6 +80,10 @@
       <a class="nav-item" href="{{ route('productos.index') }}">
         <i class="fa-solid fa-boxes-stacked"></i>
         <span>Productos</span>
+      </a>
+      <a class="nav-item" href="{{ route('proveedores.index') }}">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>Proveedores</span>
       </a>
       <a class="nav-item d-none" href="#">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>

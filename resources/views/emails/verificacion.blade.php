@@ -80,7 +80,7 @@
         </p>
         <p>Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
         <div class="footer">
-            &copy; {{ date('Y') }} NATURAL TUNA. Todos los derechos reservados.
+            &copy; {{ date('Y') }} ALTUNA S.A. Todos los derechos reservados.
         </div>
     </div>
 </body>
