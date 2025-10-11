@@ -34,6 +34,9 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+  @livewireStyles
+    @stack('css')
+
   <link rel="stylesheet" href="{{ asset('assets/css/update.css')}}">
   <link rel="stylesheet" href="{{ asset('fonts/css/all.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
@@ -77,7 +80,7 @@
         <i class="fa-solid fa-boxes-stacked"></i>
         <span>Pedidos</span>
       </a>
-      <a class="nav-item" href="{{ route('productos.index') }}">
+      <a class="nav-item" href="/productos">
         <i class="fa-solid fa-boxes-stacked"></i>
         <span>Productos</span>
       </a>
@@ -85,7 +88,7 @@
         <i class="fa-solid fa-boxes-stacked"></i>
         <span>Proveedores</span>
       </a>
-      <a class="nav-item d-none" href="#">
+      <a class="nav-item" href="{{ route('reporte.ventas') }}">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         <span>Reportes</span>
       </a>
@@ -127,11 +130,13 @@
       
     </div>
     @yield('content')
+    
   </div>
 
 </div>
 
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
 
 <script>
   // small responsive menu toggle
@@ -148,7 +153,8 @@
   
 </script>
 
-
+@livewireScripts
+    @stack('scripts')
 
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
@@ -211,7 +217,16 @@
   });
 </script>
 
+<script>
+document.addEventListener('livewire:load', function () {
+    Livewire.on('productoToast', data => {
+        toastr[data.tipo](data.mensaje);
+    });
+});
+</script>
+
 @yield('scriptFinal')
+
 
 </body>
 </html>

@@ -1,14 +1,34 @@
-
+body{
+    /* background-color: var(--contrast2-color); */
+    font-family: var(--heading-font);
+}
+h2{
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+#inicio{
+    & img {
+        filter: brightness(60%);
+        transition: 0.3s;
+    }
+    & img:hover {
+        filter: brightness(100%);
+    }
+}
 .header{
-    position: sticky;
+    position: sticky; /* o fixed si quieres que siempre permanezca visible */
     top: 0;
+    left: 0;
+    width: 100%;       /* que ocupe todo el ancho */
+    z-index: 999;     /* por encima de todo */
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
     padding: 1rem;
     justify-content: center;
     align-items: center;
-    background-color: var(--accent-color);
+    background-color: white;
     color: #D4A24F;
 }
 .header h3{
@@ -19,6 +39,7 @@
 .header i{
     color: var(--contrast-color);
 }
+
 .header ul{
     list-style: none;
     flex-grow: 1;
@@ -37,15 +58,26 @@
     cursor: pointer;
 }
 .header a{
-    color: white;
+    color: var(--heading-color);
+    font-weight: 700;
 }
-/*
-li::before {
-    content: "🛒";
-    margin-right: 8px;
-    color: #007bff;
+.header a:hover{
+    color: var(--accent2-color);
 }
-    */
+
+
+footer{
+    background-color: var(--heading-color);
+    & a{
+        color: var(--contrast-color);
+    }
+    & a:hover{
+        color: white;
+    }
+    & p{
+        color: white;
+    }
+}
 
 
 .btn-primary{

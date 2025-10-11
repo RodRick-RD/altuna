@@ -8,8 +8,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="icon">
-    <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="apple-touch-icon">
+    <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="icon">
+    <link href="{{ asset('assets/img/icon/logo-altuna.webp') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -24,16 +24,20 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/css/all.css') }}">
 
+
+    
+    
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-    <script src="{{ asset('assets/js/jquery-3.3.1.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+
+    <script src="{{ asset('assets/js/jquery-3.3.1.js') }}"></script>
 </head>
 <body>
         <div class="header">
             <h3>ALTUNA</h3>
-            <span class="text-white"><i class="fa-solid fa-location-dot text-white"></i> Cochabamba</span>
+            <span class="text-muted"><i class="fa-solid fa-location-dot"></i> Cochabamba</span>
             <ul>
                 <li><a href="#inicio" class="active">Inicio</a></li>
                 <li><a href="#catalogo">Nuestros Productos</a></li>
@@ -54,6 +58,34 @@
                 <a href="{{ route('login') }}">iniciar sesión</a> 
             </div>
         </div>
+<div id="inicio">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img src="{{ asset('assets/img/portfolio/tuna1.jpg') }}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="{{ asset('assets/img/portfolio/tuna2.jpg') }}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="{{ asset('assets/img/portfolio/tuna3.jpg') }}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    </div>
+</div>
 
 
     <div class="container">
@@ -68,23 +100,28 @@
                         <div class="card h-100 shadow-sm">
                             
                             {{-- Imagen del Producto --}}
-                            <img src="{{ $producto['img'] }}" class="card-img-top" alt="{{ $producto['nombre'] }}" style="height: 180px; object-fit: cover;">
+                            <img src="{{ $producto['img'] }}" 
+                                class="card-img-top img-click" 
+                                alt="{{ $producto['nombre'] }}" 
+                                style="height: 180px; object-fit: cover; cursor:pointer;"
+                                data-toggle="modal" 
+                                data-target="#imagenModal" 
+                                data-img="{{ $producto['img'] }}">
                             
                             <div class="card-body d-flex flex-column">
                                 <h5 class="text-primary-out">{{ $producto['nombre'] }}</h5>
                                 
                                 <div class="mb-3">
-                                    <p class="fw-bold" style="font-size: 2rem;">bs. {{ $producto['descuento'] }}<?php //if($fila['descuento']>0){ echo (int)$fila['descuento']; }else{ echo (int)$fila['precio'];} ?></p>
+                                    <p class="fw-bold" style="font-size: 2rem;">bs. {{ $producto['descuento'] }}</p>
                                     <div class="d-flex justify-content-between gap-2 align-items-center">
-                                        <p><span class="info-descuento p-2 text-white fw-bold"> antes Bs. {{ $producto['precio'] }}</span><?php //if($fila['descuento']>0){ echo '<span class="bg-warning p-2 text-white fw-bold"> antes Bs. '.(int)$fila["precio"].'</span>'; } ?></p>
+                                        <p><span class="info-descuento p-2 text-white fw-bold"> antes Bs. {{ $producto['precio'] }}</span></p>
                                     </div>
                                 </div>
                                 
                                 <button 
                                     class="btn btn-primary mt-auto anadir-producto" 
                                     data-id="{{ $producto['id'] }}"
-                                    {{-- Deshabilitar si el stock es 0 --}}
-                                    @if ($producto['stock'] == 0) disabled @endif
+                                    
                                 >
                                     @if ($producto['stock'] == 0)
                                         🚫 Agotado
@@ -96,6 +133,27 @@
                         </div>
                     </div>
                 @endforeach
+
+                <div class="modal fade" id="imagenModal" tabindex="-1" role="dialog" aria-labelledby="imagenModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <img id="imagenAmpliada" src="" class="img-fluid rounded" alt="Imagen del producto">
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#imagenModal').on('show.bs.modal', function (event) {
+                            var trigger = $(event.relatedTarget); // el elemento que disparó el modal
+                            var imgSrc = trigger.data('img'); // obtenemos la ruta
+                            $(this).find('#imagenAmpliada').attr('src', imgSrc);
+                        });
+                    });
+                </script>
+
             </div>
 
         </div>
@@ -106,38 +164,17 @@
 
 <div id="shop">
     <div id="box-shop">
-        <div id="cart">
+        <div id="cart" class="d-flex flex-column">
             <div class="d-flex justify-content-between">
                 <h3>🛒 Carrito de Compras</h3>
                 <button class="remove-btn" onclick="ocultarCarrito()"><i class="fa-solid fa-xmark"></i></button>
 
             </div>
-            <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody id="items-carrito">
-                </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="row" colspan="4">Total Carrito:</th>
-                    <td id="total-carrito" class="font-weight-bold">$0.00</td>
-                    <td>
-                        <button class="btn btn-light btn-sm" id="vaciar-carrito">Vaciar</button>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+            <div id="items-carrito" class="flex-grow-1">
+                </div>
         
-        <div class="text-right">
-             <button class="btn btn-primary btn-lg">Comprar</button>
+        <div class="">
+             <a href="{{ route('venta.pago') }}"><button class="btn-shop-submit rounded-pill w-100" id="btn-comprar">Comprar</button></a>
         </div>
         </div>
     </div>
@@ -146,8 +183,70 @@
 
 </div>
 
+<footer class="pt-5 pb-4">
+  <div class="container">
+    <div class="row">
+
+      <!-- Logo y descripción -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-warning fw-bold">Altuna</h5>
+        <p>Tienda de productos de alta calidad. Descubre nuestras novedades y promociones.</p>
+      </div>
+
+      <!-- Enlaces útiles -->
+      <div class="col-md-3 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">Enlaces</h6>
+        <ul class="list-unstyled">
+          <li><a href="#inicio" class="text-decoration-none">Inicio</a></li>
+          <li><a href="#catalogo" class="text-decoration-none">Productos</a></li>
+          <!-- <li><a href="#contact" class="text-light text-decoration-none">Contacto</a></li> -->
+          <li><a href="{{ route('login') }}" class="text-decoration-none">Iniciar sesión</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="col-md-3 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">Contacto</h6>
+        <p class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>Cochabamba, Bolivia</p>
+        <p class="mb-2"><i class="bi bi-telephone-fill me-2"></i>+591 60763676</p>
+        <p class="mb-2"><i class="bi bi-envelope-fill me-2"></i>info@altuna.com</p>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="col-md-2 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">Redes</h6>
+        <a href="https://www.facebook.com/profile.php?id=61577622187187" class="fs-5 me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="fs-5 me-3"><i class="fab fa-instagram"></i></a>
+        <a href="" class="fs-5 me-3"><i class="fab fa-whatsapp"></i></a>
+        <a href="" class="fs-5"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+    </div>
+
+    <hr class="bg-secondary">
+
+    <div class="row">
+      <div class="col text-center">
+        <p class="mb-0">&copy; 2025 Altuna. Todos los derechos reservados.</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
 
 
+
+
+
+
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="altuna"
+  agent-id="168187b2-41ad-43fc-89f0-4647d20e3e55"
+  language-code="es"
+></df-messenger>
+    
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script> -->
@@ -337,40 +436,93 @@ function anadirAlCarrito() {
         guardarCarrito();
     }
 }
-/**
- * Dibuja todos los elementos del carrito en el HTML usando jQuery.
- */
+
 function renderizarCarrito() {
     const $itemsCarrito = $('#items-carrito');
-    $itemsCarrito.empty(); // Vaciar antes de dibujar de nuevo
+    $itemsCarrito.empty(); // vaciar antes de pintar
 
-    var cantidadCarrito=0;
-    carrito.forEach((item) => {
-        // Encontrar los datos completos del producto a partir del ID
+    let cantidadTotal = 0;
+
+    carrito.forEach(item => {
         const productoInfo = productos.find(p => p.id === item.id);
-        
-        const filaItem = `
-            <tr>
-                <th scope="row"></th>
-                <td>${productoInfo.nombre}</td>
-                <td>${item.cantidad}</td>
-                <td>Bs. ${productoInfo.precio.toFixed(2)}</td>
-                <td>Bs. ${(productoInfo.precio * item.cantidad).toFixed(2)}</td>
-                <td>
+
+        const tarjeta = $(`
+            <div class="card mb-2 d-flex flex-row align-items-center p-2 border-0" data-id="${item.id}">
+                <img src="${productoInfo.img}" class="img-fluid" style="width:80px; height:80px; object-fit:cover; margin-right:10px;">
+                
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">${productoInfo.nombre}</h6>
+                    <p class="mb-1">Bs. ${productoInfo.precio.toFixed(2)}</p>
+                    <div class="input-group input-group-sm" style="max-width:120px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary disminuir" data-id="${item.id}">-</button>
+                        </div>
+                        <input type="text" class="form-control border-0 text-center cantidad-input" value="${item.cantidad}" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary aumentar" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ml-2 text-right">
+                    <p class="mb-1">Bs. ${(productoInfo.precio * item.cantidad).toFixed(2)}</p>
                     <button class="btn btn-outline-danger btn-sm eliminar-producto" data-id="${item.id}">
                         <i class="fa-solid fa-trash"></i>
                     </button>
-                </td>
-            </tr>
-        `;
-        $itemsCarrito.append(filaItem);
-        cantidadCarrito++;
+                </div>
+            </div>
+        `);
+
+        $itemsCarrito.append(tarjeta);
+        cantidadTotal += item.cantidad;
     });
 
-    $("#cantidadCarrito").html(cantidadCarrito);
-
+    $("#cantidadCarrito").text(cantidadTotal);
     calcularTotal();
+    if (cantidadTotal > 0) {
+        $('#btn-comprar').prop('disabled', false); // desbloqueado
+    } else {
+        $('#btn-comprar').prop('disabled', true); // bloqueado
+        var carempty = `<div class="d-flex flex-column align-items-center justify-content-center h-100">
+                    <div>
+                        <img src="assets/img/canasta-vacio.png" class="img-fluid" />
+                    </div>
+                    <p class="text-muted">Carrito vacío</p>
+                </div>`;
+                
+        $('#items-carrito').html(carempty);
+    }
 }
+
+// Aumentar cantidad
+$('#items-carrito').on('click', '.aumentar', function() {
+    const idProducto = parseInt($(this).data('id'));
+    const productoInfo = productos.find(p => p.id === idProducto);
+    const item = carrito.find(i => i.id === idProducto);
+
+    if (item.cantidad < productoInfo.stock) {
+        item.cantidad++;
+        renderizarCarrito();
+        guardarCarrito();
+    } else {
+        alert(`🚫 No puedes superar el stock disponible (${productoInfo.stock})`);
+    }
+});
+
+// Disminuir cantidad
+$('#items-carrito').on('click', '.disminuir', function() {
+    const idProducto = parseInt($(this).data('id'));
+    const item = carrito.find(i => i.id === idProducto);
+
+    if (item.cantidad > 1) {
+        item.cantidad--;
+    } else {
+        carrito = carrito.filter(i => i.id !== idProducto);
+    }
+
+    renderizarCarrito();
+    guardarCarrito();
+});
 
 /**
  * Calcula el precio total del carrito y lo actualiza en el DOM.

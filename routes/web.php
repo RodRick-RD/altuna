@@ -7,6 +7,7 @@ use App\Http\Controllers\ControllerContacto;
 use App\Http\Controllers\ControllerPedido;
 use App\Http\Controllers\ControllerProducto;
 use App\Http\Controllers\ControllerProveedor;
+use App\Http\Controllers\ControllerReportes;
 use App\Http\Controllers\ControllerShop;
 use App\Http\Controllers\ControllerUser;
 use App\Http\Controllers\ControllerVenta;
@@ -63,8 +64,11 @@ Route::middleware(['auth','role:administrador'])->group(function () {
     Route::get('/usuarios', [ControllerUser::class, 'index'])->name('usuario.index');
     Route::post('/usuario/estado', [ControllerUser::class, 'cambiarEstado'])->name('usuario.estado');
 
-    Route::resource('/productos', ControllerProducto::class);
-    Route::post('/productos/estado', [ControllerProducto::class, 'cambiarEstado'])->name('productos.estado');
+    Route::get('/productos', function () {
+        return view('producto.index'); // Vista donde se insertará Livewire
+    });
+    //Route::resource('/productos', ControllerProducto::class);
+    //Route::post('/productos/estado', [ControllerProducto::class, 'cambiarEstado'])->name('productos.estado');
 
     Route::get('/pedido', [ControllerPedido::class, 'index'])->name('pedido.index');
     Route::get('/comprobante/{file}', [ControllerPedido::class, 'verComprobante'])->name('pedido.comprobante');
@@ -77,6 +81,8 @@ Route::middleware(['auth','role:administrador'])->group(function () {
 
 
     Route::get('/proveedores', [ControllerProveedor::class,'index'])->name('proveedores.index');
+
+    Route::get('/reporte-ventas', [ControllerReportes::class,'productos'])->name('reporte.ventas');
 
 });
 

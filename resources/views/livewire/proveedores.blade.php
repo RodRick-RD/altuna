@@ -29,8 +29,8 @@
                             <td>{{ $prov->email }}</td>
                             <td>{{ $prov->telefono }}</td>
                             <td>
-                                <button wire:click="edit({{ $prov->id }})" class="btn-icon-1">Editar</button>
-                                <button class="btn-icon-2 btn-delete" data-id="{{ $prov->id }}">Eliminar</button>
+                                <button wire:click="edit({{ $prov->id }})" class="btn-icon-1"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="btn-icon-2 btn-delete" data-id="{{ $prov->id }}"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     @empty
