@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de cuenta</title>
+    <title>COMPRA EXITOSA</title>
     <style>
         body {
             margin: 0;
@@ -23,19 +23,27 @@
         .header {
             text-align: center;
             margin-bottom: 24px;
+            padding: 3rem;
+            background-color: #2E5D3B;
+            color: white;
+            text-align: center;
         }
         .header img {
             max-width: 120px;
         }
         h2 {
             font-size: 24px;
-            color: #0f172a;
+            color: #6c6c6cff;
             margin-bottom: 12px;
+            text-align: center;
         }
         p {
             font-size: 16px;
             line-height: 1.6;
             margin: 12px 0;
+        }
+        span{
+            color: #2E5D3B;
         }
         .btn {
             display: inline-block;
@@ -68,17 +76,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <!-- <img src="https://your-domain.com/logo.png" alt="Natural Tuna Logo"> -->
+            ALTUNA
         </div>
-        <h2>Hola {{ $name }}</h2>
-        <p>Gracias por registrarte en nuestra plataforma de <strong>ALTUNA S.R.L.</strong>.</p>
-        <p>Por favor haz clic en el siguiente enlace para activar tu cuenta:</p>
-        <p style="text-align:center;">
-            <a href="{{ route('verificar.cuenta', $codigo) }}" class="btn">
-                Activar mi cuenta
-            </a>
-        </p>
-        <p>Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
+        <h2>COMPRA EXITOSA !</h2>
+        <p>hola {{ $name }}</p>
+        <p>Tu pago ha sido recibido con éxito</p>
+        <p>Estamos enviando su compra a la dirección que proporcionaste</p>
+        <p>ID COMPRA: <span>{{ $pedidoId }}</span></p> 
         <div class="footer">
             &copy; {{ date('Y') }} ALTUNA S.A. Todos los derechos reservados.
         </div>

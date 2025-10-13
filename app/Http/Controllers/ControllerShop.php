@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Producto;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +12,17 @@ class ControllerShop extends Controller
 {
     public function index(){
 
-        $productos=Producto::with('categoria')->where('estado', '!=', 3)->get();
+        $productos=Producto::with('categoria')->where('estado', '!=', 3)->orderBy('tipo','desc')->get();
         return view('shop',compact('productos'));
     }
     public function validarventa(){
+
+        if (Auth::user()->role !== 'cliente') {
+            abort(403, 'acceso denegado, Solamente habilitado para CLIENTES.');
+        }
+
+
+
         $carrito = session()->get('carrito', []);
         $productos=Producto::all();
         $user = auth()->user();
@@ -100,7 +108,7 @@ class ControllerShop extends Controller
         // 4. Limpiar carrito
         session()->forget('carrito');
 
-        // 5. Avisar
+        //return redirect()->route('venta.showpdf', ['id' => $pedido->id]);
         return back()->with('mensaje', '¡Pedido recibido! Te contactaremos pronto.');
     }
 
@@ -116,6 +124,19 @@ class ControllerShop extends Controller
         return view('client.pedidos', compact('pedidos'));
         */
         return view('client.mis-compras');
+    }
+
+    public function showPDFventa(string $id)
+    {
+        $idUser = Auth::id();
+        $ventas=null;
+
+            $ventas=Pedido::with('productos')
+            ->where('id', $id)
+            ->get();
+
+        $pdf = Pdf::loadView('venta.comprobante-pdf', compact('ventas'));
+        return $pdf->stream('nota-de-venta.pdf');
     }
 
     

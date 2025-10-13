@@ -96,10 +96,10 @@
                     <h2>NUESTROS PRODUCTOS</h2>
                 </div>
                 @foreach ($productos as $producto)
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            
-                            {{-- Imagen del Producto --}}
+                    <div class="col-md-4 mb-4 p-2 position-relative overflow-hidden">
+                        
+                        <div class="card h-100 shadow-sm border-0">
+
                             <img src="{{ $producto['img'] }}" 
                                 class="card-img-top img-click" 
                                 alt="{{ $producto['nombre'] }}" 
@@ -131,8 +131,25 @@
                                 </button>
                             </div>
                         </div>
+                        @if (isset($producto['tipo']) && $producto['tipo'] == 'P')
+                                <div class="position-absolute top-0 end-0 z-4">
+                                    <span class="ribbon">Promoción</span>
+                                </div>
+                            @endif
+                            @if (isset($producto['tipo']) && $producto['tipo'] == 'N')
+                                <div class="position-absolute top-0 end-0 z-index-1">
+                                    <span class="ribbon bg-danger">¡ Nuevo !</span>
+                                </div>
+                            @endif
+
+
+
                     </div>
                 @endforeach
+
+
+
+
 
                 <div class="modal fade" id="imagenModal" tabindex="-1" role="dialog" aria-labelledby="imagenModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

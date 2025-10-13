@@ -5,10 +5,16 @@
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
 @if(session('mensaje'))
-    <div class="alert alert-success text-center">
+    <div class="text-success text-center">
         {{ session('mensaje') }}
- 
-     </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center p-2">
+         @if(session('pedido_id'))
+            <a href="{{ url('/venta/pdf/' . session('pedido_id')) }}" target="_blank" class="rounded-pill submit btn-shop-submit">
+                <i class="fa-solid fa-file-pdf"></i> Ver comprobante de VENTA
+            </a>
+        @endif
+    </div>
      <script>
       localStorage.setItem('carritoCompra', JSON.stringify([]));
      </script>
@@ -57,7 +63,7 @@
 
       
     </div>
-    <div class="col-12">
+    <div class="col-12" id="infoComprobante">
           <div class="p-2">
             <form action="{{ route('shop.subirComprobante') }}" method="POST" enctype="multipart/form-data" class="p-4 form-design">
                 @csrf
@@ -203,6 +209,7 @@ function mostrarCarrito() {
 
     if (carrito.length === 0) {
         tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">Carrito vacío</td></tr>`;
+        $("#infoComprobante").hide();
         document.getElementById("total").innerText = "0.00 Bs";
         document.getElementById("carrito-input").value = "[]";
         return;

@@ -2,22 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Nota de Venta - ALTUNA</title>
+    <title>IMPRIMIR Nota de Venta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="icon">
     <link href="{{ asset('assets/img/icon/logo.jpg') }}" rel="apple-touch-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
         @page {
             margin: 0;
-            size: A4 portrait;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 3rem;
             color: #333;
             background: #ffffffff;
+            max-width: 100dvw;
         }
 
         .page {
@@ -144,7 +151,11 @@
     </style>
 </head>
 <body>
-    <div class="page" id="page">
+    <div class="p-2 d-flex justify-content-start">
+        <a href="{{ route('pedido.index') }}"><button class="btn btn-warning btn-sm rounded-pill mr-3">volver</button></a>
+        <a href="{{ route('pedido.comprobanteventapdf',$pedido->id)}}"><button class="btn btn-outline-dark btn-sm rounded-pill" title="descargar comprobante">descargar</button></a>
+    </div>
+    <div class="page">
 
         <!-- Ribbon -->
         <div class="ribbon">Pagado</div>
@@ -162,7 +173,6 @@
         </div>
 
         <h3 class="titulo">Nota de Venta</h3>
-        @forelse ($ventas as $pedido)
         <table style="width: 100%; border: none;">
             <tr>
                 <td class="border: none;" style="width: 50%;"><b>CLIENTE: </b>{{ $pedido->razon_social }}</td>
@@ -216,9 +226,6 @@
                     </tr>
             </tbody>
         </table>
-    @empty
-        <div style="text-align:center;">No hay resultados</div>
-    @endforelse
         <!-- Footer -->
         <div class="footer">
             <p>Gracias por su compra — {{ date('d/m/Y') }}</p>

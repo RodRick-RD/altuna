@@ -12,10 +12,8 @@ class ReporteVentas extends Component
     public $fechaInicio;
     public $fechaFin;
 
-    public $labels = [];       // Para nombres de productos
-    public $ventas = [];       // Para total vendido por producto (Donut)
-    public $dias = [];         // Para line chart
-    public $ventasPorDia = []; // Para line chart
+    public $labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May'];
+    public $data = [120, 190, 100, 170, 90];
 
     public function mount()
     {

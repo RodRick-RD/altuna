@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -60,6 +61,7 @@
     </div>
 
     <nav>
+@role('cliente')
       <a class="nav-item active" href="/dashboard">
         <!-- dashboard icon -->
         <i class="fa-solid fa-house"></i>
@@ -70,10 +72,11 @@
         <i class="fa-solid fa-boxes-packing"></i>
         <span>Mis compras</span>
       </a>
+@endrole
 @role('administrador')
 
       <a class="nav-item" href="{{ route('ventas.index') }}">
-        <i class="fa-solid fa-boxes-stacked"></i>
+        <i class="fas fa-dollar-sign"></i>
         <span>Ventas</span>
       </a>
       <a class="nav-item" href="{{ route('pedido.index') }}">
@@ -197,6 +200,7 @@
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('assets/js/loader.js') }}"></script>
 <!-- <script src="../dist/js/pages/dashboard.js"></script> -->
+ <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 
 <script>

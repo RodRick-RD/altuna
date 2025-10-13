@@ -30,6 +30,7 @@
                   $colores = [
                       'vendido' => 'bg-success',
                       'eliminado' => 'bg-danger text-white',
+                      'anulado' => 'bg-danger text-white',
                       'pedido' => 'bg-secondary',
                   ];
               @endphp
@@ -60,7 +61,7 @@
                                     </td>
                                     <td>
                                         @if($pedido->estado=='vendido')
-                                            <a href="{{ route('pedido.comprobanteventapdf',$pedido->id)}}"><button class="btn-icon-danger" title="descargar comrpobante"><i class="fa-solid fa-file-pdf"></i></button></a>
+                                            <a href="{{ route('pedido.comprobanteventapdf',$pedido->id)}}"><button class="btn-icon-danger" title="descargar comprobante"><i class="fa-solid fa-file-pdf"></i></button></a>
                                         @else
                                             <span class="text-danger">[no disponible]</span>
 

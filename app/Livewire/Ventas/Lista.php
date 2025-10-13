@@ -11,10 +11,17 @@ class Lista extends Component
 {
     public $fechaInicio;
     public $fechaFinal;
-    public $tipoDeVenta = 'pedido';
+    public $tipoDeVenta = 'todos';
 
 
     public $resultados = [];
+
+    public function mount()
+    {
+        $this->fechaInicio = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $this->fechaFinal = Carbon::now()->endOfMonth()->format('Y-m-d');
+
+    }
 
     public function buscar()
     {

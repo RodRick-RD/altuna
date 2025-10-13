@@ -116,8 +116,9 @@
                 <label>Tipo</label>
                 <select wire:model="tipo">
                     <option value="">-- Seleccionar --</option>
-                    <option value="E">E</option>
-                    <option value="N">N</option>
+                    <option value="E">Efectivo</option>
+                    <option value="N">Nuevo</option>
+                    <option value="P">Promoción</option>
                 </select>
                 @error('tipo') <span class="text-danger">{{ $message }}</span>@enderror
             </div>

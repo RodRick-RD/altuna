@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/subir-comprobante', [ControllerShop::class, 'subirComprobante'])->name('shop.subirComprobante');
     Route::get('/lista-pedidos', [ControllerShop::class, 'listapedidos'])->name('pedido.lista');
     Route::get('/comprobante-de-venta/{id}/pdf', [ControllerPedido::class, 'exportPDFventa'])->name('pedido.comprobanteventapdf');
+    Route::get('/venta/pdf/{id}', [ControllerShop::class, 'showPDFventa'])->name('venta.showpdf');
     Route::get('/mis-datos', [ControllerUser::class, 'edit'])->name('client.edit');
 
 
@@ -75,6 +76,7 @@ Route::middleware(['auth','role:administrador'])->group(function () {
     Route::get('/ubicacion/{id}', [ControllerPedido::class, 'ubicacion'])->name('ubicacion');
     Route::get('/pedido/{id}/confirmar', [ControllerPedido::class, 'confirmar'])->name('pedido.confirmar');
     Route::put('/pedido/validar-pedido', [ControllerPedido::class, 'validarPedido'])->name('pedido.validarpedido');
+    Route::delete('/eliminarpedido/{id}', [ControllerPedido::class, 'eliminarpedido'])->name('pedido.eliminar');
     
     
     Route::get('/ventas', [ControllerVenta::class, 'index'])->name('ventas.index');
@@ -83,6 +85,7 @@ Route::middleware(['auth','role:administrador'])->group(function () {
     Route::get('/proveedores', [ControllerProveedor::class,'index'])->name('proveedores.index');
 
     Route::get('/reporte-ventas', [ControllerReportes::class,'productos'])->name('reporte.ventas');
+    Route::get('/reporte/ventas-fechas', [ControllerReportes::class, 'ventasPorFechas'])->name('reporte.ventas.fechas');
 
 });
 

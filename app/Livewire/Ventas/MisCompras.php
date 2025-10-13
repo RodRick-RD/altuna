@@ -17,6 +17,13 @@ class MisCompras extends Component
 
     public $resultados = [];
 
+    public function mount()
+    {
+        $this->fechaInicio = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $this->fechaFinal = Carbon::now()->endOfMonth()->format('Y-m-d');
+
+    }
+
     public function buscar()
     {
         $this->validate([

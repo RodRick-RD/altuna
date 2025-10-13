@@ -91,7 +91,7 @@
             </div>
 
             @if($venta)
-                <button type="submit" class="rounded-pill btn-shop-submit w-100">Validar Pedido</button>
+                <button type="submit" class="rounded-pill btn-shop-submit w-100" onclick="disableButton(this)">Validar Pedido</button>
             @endif
         </form>
     </div>
@@ -127,6 +127,14 @@ $(document).ready(function() {
         precioFinalDisplay.text(precioFinal.toFixed(2));
     });
 });
+</script>
+<script>
+    function disableButton(button) {
+        button.disabled = true;
+        button.innerHTML = 'Enviando... ';
+        button.classList.add('btn-loading');
+        button.form.submit();
+    }
 </script>
 
 @endsection

@@ -176,7 +176,7 @@
                                     <option value="BM">Bermudas</option>
                                     <option value="BY">Bielorrusia</option>
                                     <option value="MM">Birmania</option>
-                                    <option value="BO">Bolivia</option>
+                                    <option value="BO" selected>Bolivia</option>
                                     <option value="BA">Bosnia y Herzegovina</option>
                                     <option value="BW">Botswana</option>
                                     <option value="BR">Brasil</option>

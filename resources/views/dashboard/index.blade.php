@@ -1,6 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+@role('cliente')
 <div class="grid">
       <!-- metrics -->
       <div class="card col-span-3">
@@ -28,9 +30,43 @@
           </div>
         </a>
       </div>
+</div>
+@endrole
+@role('administrador')
+  <h3 class="h3 text-center p-3 text-muted">ALTUNA S.R.L.</h3>
 
+  <div class="grid">
+      <!-- metrics -->
+      <div class="card col-span-3">
+        <a class="nav-item space-between" href="/#catalogo">
+          <div>
+            <h3>Comprar</h3>
+            <div class="metric"><div class="value">Ir a productos</div></div>
+          </div>
+          <div class="icon-wrap h1">
+            <!-- money icon -->
+            <i class="fa-solid fa-cart-plus"></i>
+          </div>
+        </a>
+      </div>
+
+      <div class="card col-span-3">
+        <a class="nav-item space-between" href="{{ route('venta.pago') }}">
+          <div>
+            <h3>Mi carrito</h3>
+            <div class="metric"><div class="value" id="cantidadCarritoDashboard">0</div></div>
+          </div>
+          <div class="icon-wrap h1">
+            <!-- money icon -->
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        </a>
+      </div>
 </div>
 
+
+
+@endrole
 <script>
   document.addEventListener("DOMContentLoaded", function() {
       const GUARDAR_CARRITO = 'carritoCompra';

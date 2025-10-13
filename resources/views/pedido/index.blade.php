@@ -105,8 +105,27 @@
 
     function eliminarPedido(id){
         $(".modal-title").html("Eliminar Pedido");
-        $(".modal-body").html("<p>¿ esta seguro de eliminar este pedido ?</p><button class='btn-shop-submit rounded-pill py-2 px-4'>"+ "eliminar</button>");
+        $(".modal-body").html("<p>¿ esta seguro de eliminar este pedido ?</p><button class='btn-shop-submit rounded-pill py-2 px-4' onclick='deleteproduct("+id+")'>"+ "eliminar</button>");
         $(".modal").modal("show");
+    }
+    function deleteproduct(id){
+        $.ajax({
+            url: "/eliminarpedido/" + id,
+            type: "DELETE",
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = '/pedido';
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                alert('Error al eliminar el pedido: ' + xhr.status + '\n' + xhr.responseText);
+            }
+        });
     }
 </script>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ControllerPedido extends Controller
 {
@@ -75,7 +77,35 @@ class ControllerPedido extends Controller
         $pedido->estado = "vendido";
         $pedido->save();
 
-        return redirect('/pedido')->with('success', 'PEDIDO agregado a VENTAS correctamente.');
+        //return redirect('/pedido')->with('success', 'PEDIDO agregado a VENTAS correctamente.');
+
+        $idUser = Auth::id();
+        $ventas=null;
+        if(Auth::user()->role!='cliente'){
+            $pedido=Pedido::with('productos')->findOrFail($pedido->id);
+
+        }else{
+            $pedido=Pedido::with('productos')->where('user_id', $idUser)->findOrFail($pedido->id);
+        }
+
+        $iduser=$pedido->user_id;
+        $cliente=User::findOrFail($iduser);
+
+        $data = [
+            'email' => $cliente->email,
+            'name' => $cliente->name,
+            'pedidoId' => $id,
+        ];
+
+        // Enviar correo de verificación
+        Mail::send('emails.validacion-venta', $data, function ($message) use ($data) {
+            $message->to($data['email'], $data['name'])
+                    ->subject('Compra exitosa - Su pedido ha sido procesado');
+        });
+
+
+        
+        return view('venta.imprimir-comprobante', compact('pedido'));; 
     }
 
      public function exportPDFventa(string $id) 
@@ -96,5 +126,16 @@ class ControllerPedido extends Controller
         
         $pdf = Pdf::loadView('venta.comprobante-pdf', compact('ventas')); 
         return $pdf->download('nota-de-venta.pdf'); 
+    } 
+
+    public function eliminarpedido(string $id) 
+    { 
+        $producto = Pedido::find($id);
+        if (!$producto) {
+            return response()->json(['success' => false, 'message' => 'Producto no encontrado']);
+        }
+        $producto->estado = 'eiminado';
+        $producto->save();
+        return response()->json(['success' => true, 'estado' => $producto->estado]);
     } 
 }
